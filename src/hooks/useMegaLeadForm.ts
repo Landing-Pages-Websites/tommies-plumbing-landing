@@ -42,13 +42,20 @@ function buildPayload(lead: LeadFormData): Record<string, unknown> {
 
 const SUBMIT_TIMEOUT_MS = 15000;
 
-async function readResponse(response: Response): Promise<SubmissionResponse> {
+async function parseBody(response: Response): Promise<Partial<SubmissionResponse> | null> {
   try {
-    return { ...((await response.json()) as SubmissionResponse), ok: true };
+    return (await response.json()) as Partial<SubmissionResponse>;
   } catch {
-    // A 2xx with an empty/non-JSON body still means the lead was accepted.
-    return { ok: true };
+    return null;
   }
+}
+
+async function readResponse(response: Response): Promise<SubmissionResponse> {
+  const body = await parseBody(response);
+  // A 2xx with an empty/non-JSON body still means the lead was accepted,
+  // but an explicit `ok: false` is a rejection and must not count as a lead.
+  if (body?.ok === false) throw new Error("Lead submission was rejected by the server");
+  return { ...body, ok: true };
 }
 
 async function postLead(lead: LeadFormData): Promise<SubmissionResponse> {

@@ -15,7 +15,7 @@ const barlow = Barlow({ subsets: ["latin"], weight: ["400", "500", "600", "700"]
 // siteKey pairs with MEGA_CONFIG.SITE_ID in src/lib/mega-config.ts — fill BOTH after registration.
 // The lint reads this literal. siteKey is filled after `mega site-tracking enable`; until then the optimizer stays off (fail closed).
 const MEGA_TAG_CONFIG: TrackingConfig = {
-  siteKey: "sk_PLACEHOLDER_PENDING_REGISTRATION",
+  siteKey: "e34w0qv1g1tocgod",
   gtmId: "GTM-MNZHFKKH",
   pixelId: "858245649089003",
 };

@@ -3,7 +3,7 @@
 // the siteKey in MEGA_TAG_CONFIG (src/app/layout.tsx).
 export const MEGA_CONFIG = {
   CUSTOMER_ID: "0901d69a-a505-4374-a98e-269b96a9d4c3",
-  SITE_ID: "PLACEHOLDER_SITE_ID",
+  SITE_ID: "0c51afca-7404-4eb6-afc6-23f1be675a90",
   SOURCE_PROVIDER: "customer-landing-tommies-plumbing",
   ENDPOINT: "https://analytics.gomega.ai/submission/submit",
 } as const;
