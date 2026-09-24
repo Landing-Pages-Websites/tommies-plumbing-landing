@@ -1,0 +1,10 @@
+import type { ReactElement } from "react";
+import { FormCard } from "@/components/landing/FormCard";
+
+export function HeroFormCard(): ReactElement {
+  return (
+    <div id="hero-form" className="order-3 scroll-mt-28 lg:order-none lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:self-start">
+      <FormCard formId="hero-lead-form" titleId="hero-form-title" title="Book plumbing service" subtitle="Tell us what's going on. Four quick fields and one question." />
+    </div>
+  );
+}
