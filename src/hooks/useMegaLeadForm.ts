@@ -5,7 +5,7 @@ import { getSessionId, getVisitorId, initAttribution } from "@/lib/attribution";
 import { isValidEmail } from "@/lib/email";
 import type { LeadFormData } from "@/lib/lead-types";
 import { MEGA_CONFIG, hasLiveLeadRouting } from "@/lib/mega-config";
-import { isValidPhone, toNationalDigits } from "@/lib/phone";
+import { normalizePhone } from "@/lib/phone";
 
 interface SubmissionResponse {
   ok: boolean;
@@ -22,7 +22,8 @@ function assertValidLead(lead: LeadFormData): void {
     throw new Error("First and last name are required");
   }
   if (!isValidEmail(lead.email)) throw new Error("Enter a valid email address");
-  if (!isValidPhone(lead.phone)) throw new Error("Phone must be a valid 10-digit US number");
+  // The payload phone must already be exactly 10 digits; nothing is re-derived or sliced here.
+  if (normalizePhone(lead.phone) !== lead.phone) throw new Error("Phone must be a valid 10-digit US number");
 }
 
 function buildPayload(lead: LeadFormData): Record<string, unknown> {
@@ -31,7 +32,7 @@ function buildPayload(lead: LeadFormData): Record<string, unknown> {
     customer_id: MEGA_CONFIG.CUSTOMER_ID,
     site_id: MEGA_CONFIG.SITE_ID,
     source_provider: MEGA_CONFIG.SOURCE_PROVIDER,
-    form_data: { ...lead, phone: toNationalDigits(lead.phone) },
+    form_data: lead,
     url: window.location.href,
     referrer_url: document.referrer || null,
     session_id: getSessionId(),

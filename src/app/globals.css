@@ -109,6 +109,29 @@ p {
   background-size: 48px 48px;
 }
 
+/* Hero: canvas lifting into a brand-blue wash behind the form column */
+.hero-surface {
+  background:
+    radial-gradient(70% 60% at 88% 18%, rgb(82 126 255 / 0.18), transparent 70%),
+    radial-gradient(45% 40% at 4% 0%, rgb(218 56 77 / 0.07), transparent 70%),
+    linear-gradient(180deg, var(--color-canvas) 0%, var(--color-brand-blue-wash) 100%);
+}
+
+/* The navy pipe grid, drawn in navy on the light field and faded out toward the headline */
+.hero-blueprint {
+  background-image:
+    linear-gradient(rgb(0 26 179 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 26 179 / 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(60% 70% at 82% 30%, #000 0%, transparent 72%);
+}
+
+/* Grid anchored to the band's bottom edge so its lines continue into #trust-bar */
+.hero-band {
+  background-position: left bottom;
+  box-shadow: inset 0 1px 0 rgb(201 211 255 / 0.18);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

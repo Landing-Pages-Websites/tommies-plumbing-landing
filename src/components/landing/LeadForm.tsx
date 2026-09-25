@@ -15,7 +15,7 @@ interface LeadFormProps {
 
 /** Shared lead form (hero + final section): firstName, lastName, email, phone + homeowner qualifier. */
 export function LeadForm({ formId }: LeadFormProps): ReactElement {
-  const { formRef, values, errors, status, setField, handleClick, handleKeyDown, blockNativeSubmit, retry } = useLeadForm(formId);
+  const { formRef, values, errors, status, setField, rejectPhone, handleClick, handleKeyDown, blockNativeSubmit, retry } = useLeadForm(formId);
   if (status === "success" || status === "error") {
     return <FormResult outcome={status} firstName={values.firstName} homeowner={values.homeowner} onRetry={retry} />;
   }
@@ -27,7 +27,7 @@ export function LeadForm({ formId }: LeadFormProps): ReactElement {
         <TextField formId={formId} name="lastName" label="Last name" value={values.lastName} error={errors.lastName} disabled={busy} onValueChange={setField} />
       </div>
       <TextField formId={formId} name="email" label="Email" value={values.email} error={errors.email} disabled={busy} onValueChange={setField} />
-      <PhoneField formId={formId} value={values.phone} error={errors.phone} disabled={busy} onValueChange={setField} />
+      <PhoneField formId={formId} value={values.phone} error={errors.phone} disabled={busy} onValueChange={setField} onReject={rejectPhone} />
       <QualifierToggle formId={formId} value={values.homeowner} error={errors.homeowner} disabled={busy} onValueChange={setField} />
       <SubmitButton busy={busy} onClick={handleClick} />
       <p className="flex items-start gap-2 text-fine text-brand-blue-tint">
