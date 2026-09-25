@@ -5,16 +5,17 @@ import type { ReactElement, ReactNode } from "react";
 import { QueryParamPersistence } from "@/components/landing/QueryParamPersistence";
 import { TrackingInit } from "@/components/landing/TrackingInit";
 import type { TrackingConfig } from "@/hooks/useTracking";
-import { MEGA_ENDPOINTS, isPlaceholderId } from "@/lib/mega-config";
+import { MEGA_CONFIG, MEGA_ENDPOINTS, isPlaceholderId } from "@/lib/mega-config";
 import { GOOGLE_RATING, PHONE_DISPLAY, YEARS_EXPERIENCE } from "@/lib/site-config";
 import "./globals.css";
 
 const baloo = Baloo_Da_2({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-baloo", display: "swap" });
 const barlow = Barlow({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-barlow", display: "swap" });
 
-// siteKey pairs with MEGA_CONFIG.SITE_ID in src/lib/mega-config.ts — fill BOTH after registration.
-// The lint reads this literal. siteKey is filled after `mega site-tracking enable`; until then the optimizer stays off (fail closed).
+// siteId is read from MEGA_CONFIG.SITE_ID so the tag and the lead form can never disagree.
+// The lint reads the siteKey literal. siteKey is filled after `mega site-tracking enable`; until then the optimizer stays off (fail closed).
 const MEGA_TAG_CONFIG: TrackingConfig = {
+  siteId: MEGA_CONFIG.SITE_ID,
   siteKey: "e34w0qv1g1tocgod",
   gtmId: "GTM-MNZHFKKH",
   pixelId: "858245649089003",
@@ -39,8 +40,10 @@ export default function RootLayout({ children }: { children: ReactNode }): React
   return (
     <html lang="en" className={`${baloo.variable} ${barlow.variable}`}>
       <head>
+        <meta name="mega-site-id" content={MEGA_TAG_CONFIG.siteId} />
         <script dangerouslySetInnerHTML={{ __html: MEGA_TAG_SCRIPT }} />
-        {TRACKING_LIVE ? <script id="optimizer-script" src="https://cdn.gomega.ai/scripts/optimizer.min.js" async /> : null}
+        {/* defer, not async: React hoists async src scripts above the config script, so the optimizer could run before MEGA_TAG_CONFIG exists. */}
+        {TRACKING_LIVE ? <script id="optimizer-script" src="https://cdn.gomega.ai/scripts/optimizer.min.js" data-site-id={MEGA_TAG_CONFIG.siteId} defer /> : null}
       </head>
       <body>
         <QueryParamPersistence />

@@ -1,0 +1,397 @@
+{
+  "task_id": "19b7ac5b-5513-44c0-a365-dde7a30e76aa",
+  "customer_id": "0901d69a-a505-4374-a98e-269b96a9d4c3",
+  "purpose": "Where each customer-facing claim on the LP comes from. 'task_input' refs point into task-spec.json. 'research' refs are relative to /var/lib/megaclaw/workspace. 'customer_site' refs are public URLs.",
+  "checked_on": "2026-09-25",
+  "status_legend": {
+    "supported": "Matches task input and/or a current source.",
+    "supported-until-expiry": "Matches the live customer site now, but has a hard end date. See notes.",
+    "supported-by-capture": "Matches the research capture; the live static HTML could not re-confirm it.",
+    "needs-confirmation": "No contradicting source, but no direct source either. Controller to confirm."
+  },
+  "unresolved": [
+    "offer-expiry-and-terms",
+    "follow-up-process",
+    "review-excerpt"
+  ],
+  "claims": [
+    {
+      "id": "years-experience",
+      "claim": "More than 30 years of plumbing trade experience (rendered as '30+ years')",
+      "used_in": [
+        "src/lib/site-config.ts (YEARS_EXPERIENCE)",
+        "src/components/landing/HeroCopy.tsx",
+        "src/components/landing/TrustBar.tsx",
+        "src/components/landing/WhyTommies.tsx",
+        "src/components/landing/WhyTommiesPhoto.tsx",
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/app/layout.tsx (meta description)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Proof points confirmed on the call: locally owned, plumbing-only specialization, more than 30 years of experience"
+        },
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/plumbing/",
+          "quote": "With over 30 years of local plumbing experience",
+          "checked": "2026-09-25 (live fetch of customer site)"
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
+          "quote": "Tommie’s Plumbing brings more than 30 years of plumbing trade experience to families and businesses"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "google-rating",
+      "claim": "4.8-star Google rating across Tommie's three Google Business Profiles",
+      "used_in": [
+        "src/lib/site-config.ts (GOOGLE_RATING)",
+        "src/components/landing/TrustBar.tsx",
+        "src/components/landing/RatingCard.tsx",
+        "src/components/landing/RatingBadge.tsx",
+        "src/app/layout.tsx (meta description)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "4.8-star Google rating (three Google Business Profiles)"
+        },
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/landing_page_focus",
+          "quote": "a locally owned, 30+ year, 4.8-star plumbing-only company"
+        }
+      ],
+      "status": "supported",
+      "notes": "Rests on task input (customer-confirmed on the strategy call). The number 4.8 is not in the static HTML of https://tommiesplumbing.com/reviews/. No review count is shown on the LP. The reviews page shows a '1446' link to Google, but it is not labelled as a count, so it is deliberately not used."
+    },
+    {
+      "id": "locally-owned",
+      "claim": "Locally owned",
+      "used_in": [
+        "src/components/landing/HeroCopy.tsx",
+        "src/components/landing/TrustBar.tsx",
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/app/layout.tsx (meta description)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Proof points confirmed on the call: locally owned"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "plumbing-only",
+      "claim": "Plumbing-only specialization ('Plumbing is all we do')",
+      "used_in": [
+        "src/components/landing/HeroCopy.tsx",
+        "src/components/landing/WhyTommies.tsx",
+        "src/components/landing/CommitmentList.tsx",
+        "src/app/layout.tsx (meta description)",
+        "src/components/landing/TrustBar.tsx",
+        "src/components/landing/FinalCtaCopy.tsx"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "plumbing-only specialization"
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
+          "quote": "At Tommie’s Plumbing, plumbing is all we do"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "offer-water-heater",
+      "claim": "$100 off water heater installation",
+      "used_in": [
+        "src/components/landing/CouponCard.tsx via src/components/landing/OffersSection.tsx",
+        "src/components/landing/HeroPhoto.tsx",
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/lib/content.ts (FAQ)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Also pull any current promotions from https://tommiesplumbing.com."
+        },
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/coupons/",
+          "quote": "Water Heater Installation $100 Off redeem offer Expires 09/30/2026 Cannot be combined with any other offer. Contact for details.",
+          "checked": "2026-09-25 (live fetch of customer site)"
+        },
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/plumbing/",
+          "quote": "Our Deals ... Water Heater Installation $100 Off redeem offer Expires 09/30/2026",
+          "checked": "2026-09-25 (live fetch of customer site)"
+        }
+      ],
+      "status": "supported-until-expiry"
+    },
+    {
+      "id": "offer-service-over-250",
+      "claim": "$50 off any plumbing service over $250",
+      "used_in": [
+        "src/components/landing/CouponCard.tsx via src/components/landing/OffersSection.tsx",
+        "src/lib/content.ts (FAQ)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Also pull any current promotions from https://tommiesplumbing.com."
+        },
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/coupons/",
+          "quote": "Any Plumbing Service Over $250 $50 Off redeem offer Expires 09/30/2026 Cannot be combined with any other offer. Contact for details.",
+          "checked": "2026-09-25 (live fetch of customer site)"
+        }
+      ],
+      "status": "supported-until-expiry"
+    },
+    {
+      "id": "offer-expiry-and-terms",
+      "claim": "Offers expire 09/30/2026; cannot be combined with any other offer; contact for details",
+      "used_in": [
+        "src/lib/site-config.ts (OFFER_EXPIRY, OFFER_TERMS)",
+        "src/components/landing/CouponCard.tsx",
+        "src/components/landing/HeroPhoto.tsx",
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/components/landing/LegalFooter.tsx",
+        "src/lib/content.ts (FAQ)"
+      ],
+      "sources": [
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/coupons/",
+          "quote": "Expires 09/30/2026 Cannot be combined with any other offer. Contact for details.",
+          "checked": "2026-09-25 (live fetch of customer site)"
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/build_context.json#/messagingGuardrails",
+          "quote": "Current coupons must retain their terms and September 30, 2026 expiration date."
+        }
+      ],
+      "status": "supported-until-expiry",
+      "notes": "ACTION REQUIRED: the offers expire 09/30/2026, five days after this check. Terms and date match the customer site exactly and are unchanged. After 09/30/2026 the $100 and $50 offers and every expiry string must be removed, or replaced with new terms from the live coupons page. Do not extend the date without a source. Change it only in src/lib/site-config.ts and the coupon copy listed above."
+    },
+    {
+      "id": "club-member-fee-waiver",
+      "claim": "Club members have the service fee waived when they proceed with the work",
+      "used_in": [
+        "src/components/landing/ClubMemberCard.tsx",
+        "src/lib/content.ts (FAQ)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Feature the club-member promotion: service fee waived when the member proceeds with the work."
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/memories.json",
+          "quote": "Club-member service fee is waived when the member proceeds with work; verify exact policy before encoding it in ads or workflows."
+        }
+      ],
+      "status": "supported",
+      "notes": "Wording follows the task input. No dollar amount is stated on the LP. Client memory says the exact policy still needs verification, so the controller may want the customer to confirm it before launch."
+    },
+    {
+      "id": "services",
+      "claim": "Water heaters (gas and electric tank, all makes and models), tankless installation and service, whole-home repipes, busted-pipe/emergency repairs",
+      "used_in": [
+        "src/lib/content.ts (SERVICES, FAQ)",
+        "src/components/landing/ServicesSection.tsx"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/content_requests",
+          "quote": "Services to feature: water heaters and tankless heaters, whole-home repipes, busted-pipe/emergency repairs."
+        },
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/plumbing/",
+          "quote": "Our team has experience servicing all makes and models, including gas and electric standard tank units and tankless water heaters.",
+          "checked": "2026-09-22 (research capture sources/content_raw.json)"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "service-area",
+      "claim": "Northeast Tennessee from Morristown to Bristol, including Greeneville, Fall Branch, Johnson City, Kingsport, Elizabethton",
+      "used_in": [
+        "src/lib/content.ts (CITIES, FAQ)",
+        "src/components/landing/ServiceArea.tsx",
+        "src/components/landing/CorridorMap.tsx",
+        "src/components/landing/HeroCopy.tsx",
+        "src/app/layout.tsx (meta description)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/landing_page_focus",
+          "quote": "serving Morristown-to-Bristol Northeast Tennessee"
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/memories.json",
+          "quote": "serving Northeast Tennessee and the Tri-Cities, including Morristown, Greeneville, Fall Branch, Johnson City, Kingsport, Bristol, Elizabethton, and nearby communities/counties"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "how-we-work",
+      "claim": "Experienced plumbers show up prepared, explain what's going on, and do the job the right way",
+      "used_in": [
+        "src/components/landing/CommitmentList.tsx",
+        "src/components/landing/ProcessSteps.tsx",
+        "src/components/landing/ServicesSection.tsx"
+      ],
+      "sources": [
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
+          "quote": "Customers can expect experienced plumbers who show up prepared, explain what’s going on, and do the job the right way."
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "review-excerpt",
+      "claim": "Anonymous customer review excerpt: 'I had Jacob and Cooper come and do several jobs for me, a few small and a few very big. They were here all day, spent…'",
+      "used_in": [
+        "src/components/landing/ReviewQuote.tsx"
+      ],
+      "sources": [
+        {
+          "type": "customer_site",
+          "ref": "https://tommiesplumbing.com/reviews/",
+          "quote": "> I had Jacob and Cooper come and do several jobs for me, a few small and a few very big. They were here all day, spent… [read more]",
+          "checked": "2026-09-22 (research capture sources/content_raw.json)"
+        }
+      ],
+      "status": "supported-by-capture",
+      "notes": "Verbatim from the 2026-09-22 capture, truncated as it appears on the site, author not named. The review text is not in the 2026-09-25 static HTML, probably because a review widget renders it client-side. A verifier needs a browser to re-confirm it."
+    },
+    {
+      "id": "tagline",
+      "claim": "If you gotta leak, let Tommie's take a peek.",
+      "used_in": [
+        "src/components/landing/FinalCtaCopy.tsx"
+      ],
+      "sources": [
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
+          "quote": "“If you gotta leak, let Tommie’s take a peek.”"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "follow-up-process",
+      "claim": "After a form submission, Tommie's local office reaches out by phone or email to set up a visit",
+      "used_in": [
+        "src/components/landing/ProcessSteps.tsx",
+        "src/components/landing/FormResult.tsx",
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/lib/content.ts (FAQ)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/submission_notification_emails",
+          "quote": "[\"tommiesplumbing@yahoo.com\"]"
+        },
+        {
+          "type": "research",
+          "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/memories.json",
+          "quote": "form leads notify `tommiesplumbing@yahoo.com` and Keystone ... Client also expects MEGA-first form follow-up with fallback to Tommie’s Plumbing if MEGA receives no response."
+        }
+      ],
+      "status": "needs-confirmation",
+      "notes": "UNRESOLVED: the copy says Tommie's office follows up, but client memory describes MEGA-first follow-up with Tommie's as fallback. No source promises a response time and the LP gives none. Copy is unchanged (out of scope). The controller should confirm who follows up before launch."
+    },
+    {
+      "id": "phone",
+      "claim": "Call 423-638-3662",
+      "used_in": [
+        "src/lib/site-config.ts (PHONE_DISPLAY, PHONE_HREF)"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/phone_routing_number",
+          "quote": "423-638-3662"
+        }
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "homeowner-qualifier",
+      "claim": "Are you the homeowner or property owner? Yes / No",
+      "used_in": [
+        "src/lib/site-config.ts (QUALIFIER_QUESTION)",
+        "src/components/landing/QualifierToggle.tsx"
+      ],
+      "sources": [
+        {
+          "type": "task_input",
+          "ref": "task-spec.json#/input_data/form_fields",
+          "quote": "Qualifying question (verbatim): \"Are you the homeowner or property owner?\" - Yes (qualifying), No (disqualifying)."
+        }
+      ],
+      "status": "supported"
+    }
+  ],
+  "excluded_claims": [
+    {
+      "claim": "100% satisfaction guarantee",
+      "source": "https://tommiesplumbing.com/plumbing/",
+      "reason": "On the customer site but not confirmed in task input; the build guardrails bar guarantees without confirmation."
+    },
+    {
+      "claim": "Licensed, bonded, and insured technicians",
+      "source": "https://tommiesplumbing.com/plumbing/",
+      "reason": "Build guardrails: do not invent licenses or certifications (certifications list is empty)."
+    },
+    {
+      "claim": "$25 off drain cleaning, 10% off hose bib installation, $30 military discount",
+      "source": "https://tommiesplumbing.com/coupons/",
+      "reason": "These are current offers for services outside this page's scope (drain cleaning is out of scope), or were not selected for the page."
+    },
+    {
+      "claim": "Review count (e.g. 1446)",
+      "source": "https://tommiesplumbing.com/reviews/",
+      "reason": "The number is not labelled as a review count and build guardrails bar unconfirmed review counts."
+    },
+    {
+      "claim": "$69 residential service fee",
+      "source": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/memories.json",
+      "reason": "This is for the phone agent's scripting, not approved LP copy."
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { MEGA_ENDPOINTS, isPlaceholderId } from "@/lib/mega-config";
 
 export interface TrackingConfig {
+  siteId: string;
   siteKey: string;
   gtmId?: string;
   pixelId?: string;
@@ -29,6 +30,7 @@ export function useTracking(config: TrackingConfig): void {
     w.TRACKING_API_ENDPOINT = MEGA_ENDPOINTS.TRACKING_API;
     const script = document.createElement("script");
     script.id = "optimizer-script";
+    script.dataset.siteId = config.siteId;
     script.src = MEGA_ENDPOINTS.OPTIMIZER_SCRIPT;
     script.async = true;
     document.head.appendChild(script);
