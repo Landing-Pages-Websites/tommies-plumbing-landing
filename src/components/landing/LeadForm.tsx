@@ -15,13 +15,13 @@ interface LeadFormProps {
 
 /** Shared lead form (hero + final section): firstName, lastName, email, phone + homeowner qualifier. */
 export function LeadForm({ formId }: LeadFormProps): ReactElement {
-  const { formRef, values, errors, status, setField, handleClick, handleSubmit, retry } = useLeadForm(formId);
+  const { formRef, values, errors, status, setField, handleClick, handleKeyDown, blockNativeSubmit, retry } = useLeadForm(formId);
   if (status === "success" || status === "error") {
     return <FormResult outcome={status} firstName={values.firstName} homeowner={values.homeowner} onRetry={retry} />;
   }
   const busy = status === "submitting";
   return (
-    <form ref={formRef} id={formId} name={formId} noValidate onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form ref={formRef} id={formId} name={formId} noValidate onSubmit={blockNativeSubmit} onKeyDown={handleKeyDown} className="flex flex-col gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <TextField formId={formId} name="firstName" label="First name" value={values.firstName} error={errors.firstName} disabled={busy} onValueChange={setField} />
         <TextField formId={formId} name="lastName" label="Last name" value={values.lastName} error={errors.lastName} disabled={busy} onValueChange={setField} />

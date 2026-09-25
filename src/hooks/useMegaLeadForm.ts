@@ -5,7 +5,7 @@ import { getSessionId, getVisitorId, initAttribution } from "@/lib/attribution";
 import { isValidEmail } from "@/lib/email";
 import type { LeadFormData } from "@/lib/lead-types";
 import { MEGA_CONFIG, hasLiveLeadRouting } from "@/lib/mega-config";
-import { isValidPhone } from "@/lib/phone";
+import { isValidPhone, toNationalDigits } from "@/lib/phone";
 
 interface SubmissionResponse {
   ok: boolean;
@@ -22,7 +22,7 @@ function assertValidLead(lead: LeadFormData): void {
     throw new Error("First and last name are required");
   }
   if (!isValidEmail(lead.email)) throw new Error("Enter a valid email address");
-  if (!isValidPhone(lead.phone)) throw new Error("Phone must be exactly 10 digits");
+  if (!isValidPhone(lead.phone)) throw new Error("Phone must be a valid 10-digit US number");
 }
 
 function buildPayload(lead: LeadFormData): Record<string, unknown> {
@@ -31,7 +31,7 @@ function buildPayload(lead: LeadFormData): Record<string, unknown> {
     customer_id: MEGA_CONFIG.CUSTOMER_ID,
     site_id: MEGA_CONFIG.SITE_ID,
     source_provider: MEGA_CONFIG.SOURCE_PROVIDER,
-    form_data: { ...lead, phone: lead.phone.replace(/\D/g, "") },
+    form_data: { ...lead, phone: toNationalDigits(lead.phone) },
     url: window.location.href,
     referrer_url: document.referrer || null,
     session_id: getSessionId(),
@@ -50,11 +50,11 @@ async function parseBody(response: Response): Promise<Partial<SubmissionResponse
   }
 }
 
+// Fail closed: only an explicit `{ ok: true }` body counts as an accepted lead.
+// An empty, non-JSON, or `ok: false` 2xx is treated as a failure.
 async function readResponse(response: Response): Promise<SubmissionResponse> {
   const body = await parseBody(response);
-  // A 2xx with an empty/non-JSON body still means the lead was accepted,
-  // but an explicit `ok: false` is a rejection and must not count as a lead.
-  if (body?.ok === false) throw new Error("Lead submission was rejected by the server");
+  if (body?.ok !== true) throw new Error("Lead submission was not confirmed by the server");
   return { ...body, ok: true };
 }
 

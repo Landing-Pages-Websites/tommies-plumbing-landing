@@ -1,17 +1,24 @@
 import { Phone } from "lucide-react";
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { BUTTON_STYLES, type ButtonVariant } from "@/lib/button-styles";
-import { PHONE_HREF, PHONE_LABEL, SECONDARY_CTA } from "@/lib/site-config";
+import { PHONE_DISPLAY, PHONE_HREF, PHONE_LABEL } from "@/lib/site-config";
 
 interface PhoneButtonProps {
   variant?: Extract<ButtonVariant, "ghost" | "ghostOnDark" | "navy">;
-  label?: string;
+  label?: ReactNode;
   className?: string;
 }
 
+// The number never breaks at its hyphens when a narrow button wraps the label.
+const DEFAULT_LABEL = (
+  <>
+    Call <span className="whitespace-nowrap">{PHONE_DISPLAY}</span>
+  </>
+);
+
 export function PhoneButton({
   variant = "ghost",
-  label = SECONDARY_CTA,
+  label = DEFAULT_LABEL,
   className = "",
 }: PhoneButtonProps): ReactElement {
   return (
