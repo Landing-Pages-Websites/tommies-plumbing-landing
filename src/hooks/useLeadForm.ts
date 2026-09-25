@@ -11,6 +11,7 @@ interface UseLeadFormReturn {
   errors: LeadErrors;
   status: FormStatus;
   setField: (name: LeadFieldName, value: string) => void;
+  rejectPhone: (message: string) => void;
   handleClick: () => void;
   handleKeyDown: (event: KeyboardEvent<HTMLFormElement>) => void;
   blockNativeSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -32,16 +33,22 @@ export function useLeadForm(formId: string): UseLeadFormReturn {
   const formRef = useRef<HTMLFormElement>(null);
   const [values, setValues] = useState<LeadFormValues>(EMPTY_LEAD);
   const [errors, setErrors] = useState<LeadErrors | null>(null);
+  // A rejected (over-long) phone edit: shown at once, blocks submit, cleared by the next real phone edit.
+  const [phoneNotice, setPhoneNotice] = useState<string | null>(null);
   const { status, submitLead, retry } = useLeadSubmission(formId);
 
   const setField = (name: LeadFieldName, value: string): void => {
     const next = { ...values, [name]: value };
+    const notice = name === "phone" ? null : phoneNotice;
     setValues(next);
-    if (errors) setErrors(validateLead(next));
+    setPhoneNotice(notice);
+    if (errors) setErrors(validateLead(next, notice));
   };
 
+  const rejectPhone = (message: string): void => setPhoneNotice(message);
+
   const handleClick = (): void => {
-    const found = validateLead(values);
+    const found = validateLead(values, phoneNotice);
     setErrors(found);
     if (Object.keys(found).length > 0) return focusFirstInvalid(formRef.current, found);
     void submitLead(values);
@@ -58,5 +65,6 @@ export function useLeadForm(formId: string): UseLeadFormReturn {
   // Defensive only: nothing in the flow should reach here, and it never submits the lead.
   const blockNativeSubmit = (event: FormEvent<HTMLFormElement>): void => event.preventDefault();
 
-  return { formRef, values, errors: errors ?? {}, status, setField, handleClick, handleKeyDown, blockNativeSubmit, retry };
+  const shownErrors = phoneNotice ? { ...errors, phone: phoneNotice } : errors ?? {};
+  return { formRef, values, errors: shownErrors, status, setField, rejectPhone, handleClick, handleKeyDown, blockNativeSubmit, retry };
 }
