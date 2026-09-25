@@ -14,7 +14,7 @@ export function FinalCtaCopy(): ReactElement {
     <div className="lg:col-span-6">
       <p className="text-fine font-semibold uppercase tracking-[0.14em] text-brand-blue-tint">If you gotta leak, let Tommie&apos;s take a peek.</p>
       <h2 id="final-title" className="mt-4 text-[2.25rem] font-bold leading-[1.05] sm:text-display-2 lg:text-[3rem]">Book plumbing service with a local team that does it right.</h2>
-      <p className="mt-5 max-w-lg text-[1.125rem] text-brand-blue-tint">Send the form and Tommie&apos;s local office will follow up, or call now to talk it through.</p>
+      <p className="mt-5 max-w-lg text-[1.125rem] text-brand-blue-tint">Send a service request with the form, or call now to talk it through.</p>
       <ul className="mt-8 flex flex-col gap-3">
         {REASSURANCES.map((line) => (
           <li key={line} className="flex items-center gap-3 font-semibold">

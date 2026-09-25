@@ -7,8 +7,8 @@ const STEPS = [
     body: "Send the short form or call the office. Four fields and one question — that's it.",
   },
   {
-    title: "The local office follows up",
-    body: "Tommie's reaches out with the phone number or email you shared to talk it through and set a time.",
+    title: "Your request is received",
+    body: "The phone number or email you shared is used to talk it through and set a time.",
   },
   {
     title: "An experienced plumber shows up prepared",

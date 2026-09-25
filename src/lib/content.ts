@@ -87,6 +87,6 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: "What happens after I book?",
-    answer: `Your request goes to Tommie's local office, and the team reaches out using the phone number or email you provided to talk through the problem and set up a visit. If you'd rather talk now, call ${PHONE_DISPLAY}.`,
+    answer: `Your service request is sent with the details you shared, and the phone number or email you provided is used to follow up, talk through the problem, and set up a visit. If you'd rather talk now, call ${PHONE_DISPLAY}.`,
   },
 ];

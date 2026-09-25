@@ -7,12 +7,11 @@
     "supported": "Matches task input and/or a current source.",
     "supported-until-expiry": "Matches the live customer site now, but has a hard end date. See notes.",
     "supported-by-capture": "Matches the research capture; the live static HTML could not re-confirm it.",
-    "needs-confirmation": "No contradicting source, but no direct source either. Controller to confirm."
+    "needs-confirmation": "No contradicting source, but no direct source either. Controller to confirm.",
+    "removed": "The claim was taken out of shipped copy. It is kept here as an audit record."
   },
   "unresolved": [
-    "offer-expiry-and-terms",
-    "follow-up-process",
-    "review-excerpt"
+    "offer-expiry-and-terms"
   ],
   "claims": [
     {
@@ -25,7 +24,8 @@
         "src/components/landing/WhyTommies.tsx",
         "src/components/landing/WhyTommiesPhoto.tsx",
         "src/components/landing/FinalCtaCopy.tsx",
-        "src/app/layout.tsx (meta description)"
+        "src/app/layout.tsx (meta description)",
+        "src/components/landing/ReviewsSection.tsx (intro)"
       ],
       "sources": [
         {
@@ -55,7 +55,8 @@
         "src/components/landing/TrustBar.tsx",
         "src/components/landing/RatingCard.tsx",
         "src/components/landing/RatingBadge.tsx",
-        "src/app/layout.tsx (meta description)"
+        "src/app/layout.tsx (meta description)",
+        "src/components/landing/ReviewsSection.tsx (intro)"
       ],
       "sources": [
         {
@@ -79,7 +80,8 @@
         "src/components/landing/HeroCopy.tsx",
         "src/components/landing/TrustBar.tsx",
         "src/components/landing/FinalCtaCopy.tsx",
-        "src/app/layout.tsx (meta description)"
+        "src/app/layout.tsx (meta description)",
+        "src/components/landing/ReviewsSection.tsx (intro)"
       ],
       "sources": [
         {
@@ -99,7 +101,8 @@
         "src/components/landing/CommitmentList.tsx",
         "src/app/layout.tsx (meta description)",
         "src/components/landing/TrustBar.tsx",
-        "src/components/landing/FinalCtaCopy.tsx"
+        "src/components/landing/FinalCtaCopy.tsx",
+        "src/components/landing/ReviewsSection.tsx (intro)"
       ],
       "sources": [
         {
@@ -282,9 +285,7 @@
     {
       "id": "review-excerpt",
       "claim": "Anonymous customer review excerpt: 'I had Jacob and Cooper come and do several jobs for me, a few small and a few very big. They were here all day, spent…'",
-      "used_in": [
-        "src/components/landing/ReviewQuote.tsx"
-      ],
+      "used_in": [],
       "sources": [
         {
           "type": "customer_site",
@@ -293,8 +294,8 @@
           "checked": "2026-09-22 (research capture sources/content_raw.json)"
         }
       ],
-      "status": "supported-by-capture",
-      "notes": "Verbatim from the 2026-09-22 capture, truncated as it appears on the site, author not named. The review text is not in the 2026-09-25 static HTML, probably because a review widget renders it client-side. A verifier needs a browser to re-confirm it."
+      "status": "removed",
+      "notes": "REMOVED 2026-09-25. On 2026-09-25 the controller checked the live https://tommiesplumbing.com/reviews/ in a browser and could not find this quote. LP QA does not allow unverified testimonials, so src/components/landing/ReviewQuote.tsx was deleted. It was not paraphrased or replaced with another quote. The #reviews section now shows only the task-confirmed 4.8-star Google rating (RatingCard) next to the section heading and a short intro, plus the section's DualCta. The LP has no testimonial quote."
     },
     {
       "id": "tagline",
@@ -313,7 +314,7 @@
     },
     {
       "id": "follow-up-process",
-      "claim": "After a form submission, Tommie's local office reaches out by phone or email to set up a visit",
+      "claim": "After a form submission, the service request is sent and the phone number or email provided is used to follow up and set up a visit (no team named, no response time)",
       "used_in": [
         "src/components/landing/ProcessSteps.tsx",
         "src/components/landing/FormResult.tsx",
@@ -332,8 +333,8 @@
           "quote": "form leads notify `tommiesplumbing@yahoo.com` and Keystone ... Client also expects MEGA-first form follow-up with fallback to Tommie’s Plumbing if MEGA receives no response."
         }
       ],
-      "status": "needs-confirmation",
-      "notes": "UNRESOLVED: the copy says Tommie's office follows up, but client memory describes MEGA-first follow-up with Tommie's as fallback. No source promises a response time and the LP gives none. Copy is unchanged (out of scope). The controller should confirm who follows up before launch."
+      "status": "supported",
+      "notes": "AMENDED 2026-09-25. Earlier copy said Tommie's local office personally follows up. Task input and research do not confirm that, and client memory describes MEGA-first follow-up with Tommie's as fallback. All copy that promised 'the local office' follows up (ProcessSteps step 2, FinalCtaCopy subhead, FormResult success body, FAQ 'What happens after I book?') now uses neutral service-request wording. It does not name the team that follows up and gives no response time. Form delivery is unchanged (configured recipient outside the repo). Form success and failure behavior is unchanged."
     },
     {
       "id": "phone",

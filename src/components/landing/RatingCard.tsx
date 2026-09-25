@@ -5,7 +5,7 @@ import { GOOGLE_RATING } from "@/lib/site-config";
 
 export function RatingCard(): ReactElement {
   return (
-    <Reveal className="lg:col-span-4">
+    <Reveal className="lg:col-span-5">
       <div className="flex h-full flex-col justify-between gap-8 rounded-card bg-brand-navy p-8 text-white shadow-lift">
         <p className="text-fine font-semibold uppercase tracking-[0.14em] text-brand-blue-tint">Google rating</p>
         <div>

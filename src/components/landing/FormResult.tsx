@@ -14,7 +14,7 @@ interface FormResultProps {
 const COPY = {
   qualified: {
     title: "Thanks — your request is in.",
-    body: "Tommie's local office will reach out using the phone number or email you shared to talk through the problem and set up a time.",
+    body: "Your service request was sent. The phone number or email you shared will be used to follow up, talk through the problem, and set up a time.",
   },
   notOwner: {
     title: "Thanks — we've got your details.",
