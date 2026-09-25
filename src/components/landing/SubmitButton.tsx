@@ -8,7 +8,7 @@ interface SubmitButtonProps {
   onClick: () => void;
 }
 
-/** type="button" by design: the click validates first, then calls form.requestSubmit(). */
+/** type="button" by design: the click validates first, then posts the lead directly (no native submit event). */
 export function SubmitButton({ busy, onClick }: SubmitButtonProps): ReactElement {
   return (
     <button type="button" onClick={onClick} disabled={busy} aria-busy={busy} className={`group w-full ${BUTTON_STYLES.primaryOnDark} min-h-14 text-lg`}>

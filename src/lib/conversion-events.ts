@@ -22,7 +22,10 @@ function trackMegaTagSubmit(w: TrackingWindow, formId: string, lead: LeadFormDat
 }
 
 /**
- * Fire conversion events after the lead API confirms success.
+ * Fire conversion events after the lead API confirms success: exactly one MegaTag
+ * form_submit and one dataLayer form_submit. The optimizer never sees a native submit
+ * event, and GTM-MNZHFKKH's form_submit trigger only runs a sessionStorage HTML tag,
+ * so neither path sends a second Mega beacon.
  * Fails closed: nothing fires while MEGA site identifiers are still placeholders.
  */
 export function fireConversionEvents(formId: string, lead: LeadFormData): void {
@@ -31,7 +34,7 @@ export function fireConversionEvents(formId: string, lead: LeadFormData): void {
   trackMegaTagSubmit(w, formId, lead);
   w.dataLayer = w.dataLayer || [];
   w.dataLayer.push({
-    event: "form_submission",
+    event: "form_submit",
     form_id: formId,
     form_provider: FORM_PROVIDER,
     lead_qualification: lead.qualificationStatus,

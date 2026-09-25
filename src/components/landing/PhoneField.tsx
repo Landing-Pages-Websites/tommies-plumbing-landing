@@ -12,7 +12,7 @@ interface PhoneFieldProps {
   onValueChange: (name: "phone", value: string) => void;
 }
 
-/** US phone: digits only, capped at 10 via formatPhone, validated with isValidPhone upstream. */
+/** US phone: formatPhone accepts typed or pasted +1 numbers and never drops digits; isValidPhone gates submit. */
 export function PhoneField({ formId, value, error, disabled, onValueChange }: PhoneFieldProps): ReactElement {
   const id = `${formId}-phone`;
   const errorId = `${id}-error`;
