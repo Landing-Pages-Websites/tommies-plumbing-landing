@@ -1,0 +1,135 @@
+{
+  "task_id": "19b7ac5b-5513-44c0-a365-dde7a30e76aa",
+  "customer_id": "0901d69a-a505-4374-a98e-269b96a9d4c3",
+  "source": "Task input_data, copied verbatim from research artifact sources/build_task.json (captured 2026-09-22). The normalized block below restates it for QA; input_data wins on any conflict.",
+  "input_data": {
+    "ad_platforms": [
+      "meta",
+      "google"
+    ],
+    "content_requests": "Brand name: Tommie's Plumbing (note the -ie- spelling; the call transcript's 'tommysplumming' is a transcription artifact).\n\nProof points confirmed on the call: locally owned, plumbing-only specialization, more than 30 years of experience, 4.8-star Google rating (three Google Business Profiles).\n\nFeature the club-member promotion: service fee waived when the member proceeds with the work. Also pull any current promotions from https://tommiesplumbing.com.\n\nServices to feature: water heaters and tankless heaters, whole-home repipes, busted-pipe/emergency repairs. No banned words or claims were given on the call.",
+    "entri_link_done": true,
+    "entri_url": "https://book.tommiesplumbing.com",
+    "form_fields": "First Name (required), Last Name (required), Email (required), Phone (required).\n\nQualifying question (verbatim): \"Are you the homeowner or property owner?\" - Yes (qualifying), No (disqualifying). Keep the form tight - the customer explicitly confirmed just these fields plus the one question.",
+    "form_type": "custom",
+    "gtm_container_id": "GTM-MNZHFKKH",
+    "has_form": true,
+    "have_crm_access": false,
+    "is_entri_done": true,
+    "landing_page_focus": "Book plumbing service (water heaters/tankless, repipes, busted pipes) from a locally owned, 30+ year, 4.8-star plumbing-only company serving Morristown-to-Bristol Northeast Tennessee - form submit or call.",
+    "meta_pixel_id": "858245649089003",
+    "number_of_landing_pages": 1,
+    "phone_routing_number": "423-638-3662",
+    "send_leads_to_crm": false,
+    "submission_notification_emails": [
+      "tommiesplumbing@yahoo.com"
+    ],
+    "will_there_be_phone_leads": true
+  },
+  "normalized": {
+    "branding": {
+      "business_name": "Tommie's Plumbing",
+      "spelling_note": "Apostrophe and -ie- spelling; 'tommysplumming' in the call transcript is a transcription artifact.",
+      "landing_page_url": "https://book.tommiesplumbing.com",
+      "number_of_landing_pages": 1
+    },
+    "phone": {
+      "routing_number": "423-638-3662",
+      "tel_href": "tel:+14236383662",
+      "phone_leads_expected": true
+    },
+    "form": {
+      "form_type": "custom",
+      "required_fields": [
+        {
+          "label": "First Name",
+          "key": "firstName",
+          "required": true
+        },
+        {
+          "label": "Last Name",
+          "key": "lastName",
+          "required": true
+        },
+        {
+          "label": "Email",
+          "key": "email",
+          "required": true
+        },
+        {
+          "label": "Phone",
+          "key": "phone",
+          "required": true
+        }
+      ],
+      "qualifier": {
+        "question": "Are you the homeowner or property owner?",
+        "key": "homeowner",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes",
+            "outcome": "qualifying"
+          },
+          {
+            "label": "No",
+            "value": "no",
+            "outcome": "disqualifying"
+          }
+        ],
+        "note": "Both outcomes are submitted; No is disqualifying, not blocked."
+      },
+      "no_additional_fields": true,
+      "notification_emails": [
+        "tommiesplumbing@yahoo.com"
+      ],
+      "send_leads_to_crm": false,
+      "derived_payload_keys": [
+        {
+          "key": "qualificationStatus",
+          "values": [
+            "qualified",
+            "disqualified"
+          ],
+          "derived_from": "homeowner (yes -> qualified, no -> disqualified)"
+        }
+      ]
+    },
+    "tracking": {
+      "mega_site_id": "0c51afca-7404-4eb6-afc6-23f1be675a90",
+      "mega_site_key": "e34w0qv1g1tocgod",
+      "gtm_container_id": "GTM-MNZHFKKH",
+      "meta_pixel_id": "858245649089003",
+      "ad_platforms": [
+        "meta",
+        "google"
+      ],
+      "site_id_note": "site ID and site key come from MEGA site registration (controller), not input_data; gtm/pixel come from input_data.",
+      "expected_in_raw_html": [
+        "<meta name=\"mega-site-id\" content=\"0c51afca-7404-4eb6-afc6-23f1be675a90\">",
+        "window.MEGA_TAG_CONFIG with siteId, siteKey, gtmId, pixelId before the optimizer script",
+        "window.API_ENDPOINT and window.TRACKING_API_ENDPOINT before the optimizer script",
+        "exactly one <script id=\"optimizer-script\"> with data-site-id equal to the site ID",
+        "no separate GTM or Meta pixel loader (the optimizer loads both from gtmId/pixelId)"
+      ]
+    },
+    "content_focus": {
+      "landing_page_focus": "Book plumbing service (water heaters/tankless, repipes, busted pipes) from a locally owned, 30+ year, 4.8-star plumbing-only company serving Morristown-to-Bristol Northeast Tennessee - form submit or call.",
+      "services": [
+        "Water heaters and tankless heaters",
+        "Whole-home repipes",
+        "Busted-pipe / emergency repairs"
+      ],
+      "proof_points": [
+        "Locally owned",
+        "Plumbing-only specialization",
+        "More than 30 years of experience",
+        "4.8-star Google rating (three Google Business Profiles)"
+      ],
+      "promotions": [
+        "Club-member service fee waived when the member proceeds with the work",
+        "Current promotions from https://tommiesplumbing.com"
+      ]
+    }
+  }
+}
