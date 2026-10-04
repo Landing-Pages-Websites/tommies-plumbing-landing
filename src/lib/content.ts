@@ -1,4 +1,4 @@
-import { OFFER_EXPIRY, PHONE_DISPLAY } from "@/lib/site-config";
+import { PHONE_DISPLAY } from "@/lib/site-config";
 
 export interface ServiceItem {
   id: string;
@@ -80,10 +80,6 @@ export const FAQS: FaqItem[] = [
     question: "Where does Tommie's Plumbing serve?",
     answer:
       "Northeast Tennessee from Morristown to Bristol, including Greeneville, Fall Branch, Johnson City, Kingsport, Elizabethton, and the communities in between.",
-  },
-  {
-    question: "How do the current offers work?",
-    answer: `Take $100 off water heater installation or $50 off any plumbing service over $250. Both offers expire ${OFFER_EXPIRY} and cannot be combined with any other offer — contact the office for details. Club members also have the service fee waived when they proceed with the work.`,
   },
   {
     question: "What happens after I book?",
