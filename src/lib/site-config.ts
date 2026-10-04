@@ -7,9 +7,6 @@ export const PRIMARY_CTA = "Book Plumbing Service";
 export const FORM_ANCHOR = "#form";
 export const HERO_FORM_ANCHOR = "#hero-form";
 
-export const OFFER_EXPIRY = "09/30/2026";
-export const OFFER_TERMS = `Expires ${OFFER_EXPIRY}. Cannot be combined with any other offer. Contact for details.`;
-
 export const QUALIFIER_QUESTION = "Are you the homeowner or property owner?";
 
 export const GOOGLE_RATING = 4.8;

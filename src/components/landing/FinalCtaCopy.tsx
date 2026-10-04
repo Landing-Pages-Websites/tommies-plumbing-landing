@@ -1,12 +1,10 @@
 import { Check } from "lucide-react";
 import type { ReactElement } from "react";
 import { PhoneButton } from "@/components/landing/PhoneButton";
-import { OFFER_EXPIRY } from "@/lib/site-config";
 
 const REASSURANCES = [
   "Locally owned, plumbing-only team",
   "More than 30 years of trade experience",
-  `$100 off water heater installation through ${OFFER_EXPIRY}`,
 ];
 
 export function FinalCtaCopy(): ReactElement {
