@@ -24,7 +24,7 @@ export function HeroCopy(): ReactElement {
           Plumbing help from <span className="text-brand-navy">Morristown</span> to <span className="text-brand-navy">Bristol</span>
         </h1>
         <p className="mt-4 max-w-xl text-muted sm:mt-5 sm:text-[1.1875rem]">
-          No hot water, a busted pipe, or old lines that need a repipe? Tommie&apos;s Plumbing is a locally owned, plumbing-only team with more than 30 years of trade experience across Northeast Tennessee.
+          Need a water heater, repipe, or busted-pipe repair? Tommie&apos;s local plumbing-only team has 30+ years in the trade. For Tommie&apos;s club members, the service fee is waived when you proceed with the work.
         </p>
       </div>
       <ul className="order-5 flex flex-wrap gap-x-6 gap-y-2 lg:mt-6">
