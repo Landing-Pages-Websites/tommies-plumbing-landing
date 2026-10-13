@@ -1,4 +1,30 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/get-started",
+      "destination": "https://landing.gomega.ai/get-started?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/get-started/",
+      "destination": "https://landing.gomega.ai/get-started?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "https://landing.gomega.ai/privacy-policy?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/privacy-policy/",
+      "destination": "https://landing.gomega.ai/privacy-policy?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "https://landing.gomega.ai/terms-of-service?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/terms-of-service/",
+      "destination": "https://landing.gomega.ai/terms-of-service?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    }
+  ]
 }
