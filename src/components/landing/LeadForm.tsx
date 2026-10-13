@@ -13,8 +13,8 @@ interface LeadFormProps {
   formId: string;
 }
 
-const LP_PRIVACY_URL = "https://book.tommiesplumbing.com/privacy";
-const LP_TERMS_URL = "https://book.tommiesplumbing.com/terms";
+const LP_PRIVACY_URL = "https://book.tommiesplumbing.com/privacy-policy";
+const LP_TERMS_URL = "https://book.tommiesplumbing.com/terms-and-conditions";
 const SUBMISSION_ENDPOINT = "https://analytics.gomega.ai/submission/submit";
 
 interface SmsWindow extends Window {
@@ -107,7 +107,7 @@ export function LeadForm({ formId }: LeadFormProps): ReactElement {
             </a>
             {" | "}
             <a href={LP_TERMS_URL} className="font-semibold text-white underline" target="_blank" rel="noopener noreferrer">
-              Terms
+              Terms and Conditions
             </a>
           </label>
           <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-brand-blue-tint">
