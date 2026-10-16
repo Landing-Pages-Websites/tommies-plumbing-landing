@@ -14,7 +14,7 @@ export function FinalCta(): ReactElement {
       <div aria-hidden="true" className="pipe-texture absolute inset-x-0 bottom-0 top-40 sm:top-56" />
       <div className="relative mx-auto grid max-w-[1200px] gap-12 px-6 pb-20 pt-6 lg:grid-cols-12 lg:pb-24">
         <FinalCtaCopy />
-        <FormCard formId="final-lead-form" titleId="final-form-title" title="Book plumbing service" subtitle="Same four fields, one quick question." className="lg:col-span-6 lg:-mt-24" />
+        <FormCard formId="final-lead-form" titleId="final-form-title" title="Book plumbing service" subtitle="Same short form, one quick question." className="lg:col-span-6 lg:-mt-24" />
       </div>
     </section>
   );

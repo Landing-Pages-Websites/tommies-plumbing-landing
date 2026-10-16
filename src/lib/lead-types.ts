@@ -7,6 +7,7 @@ export interface LeadFormData {
   lastName: string;
   email: string;
   phone: string;
+  reasonForContact: string;
   homeowner: HomeownerAnswer;
   qualificationStatus: QualificationStatus;
 }
@@ -16,6 +17,7 @@ export interface LeadFormValues {
   lastName: string;
   email: string;
   phone: string;
+  reasonForContact: string;
   homeowner: HomeownerAnswer | "";
 }
 

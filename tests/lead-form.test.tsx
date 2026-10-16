@@ -15,6 +15,8 @@ const SUBMIT_NAME = /book plumbing service/i;
 const ERROR_TITLE = /didn't go through/i;
 const SUCCESS_TITLE = /your request is in/i;
 const QA_SENTINEL = "+15555550100";
+const REASON_LABEL = "Reason for contacting us";
+const EXPECTED_FORM_DATA = { firstName: "Qa", lastName: "Sentinel", email: "qa@example.com", phone: "5555550100", reasonForContact: "", homeowner: "yes", qualificationStatus: "qualified" };
 
 let fetchMock: Mock;
 let nativeSubmits: Mock;
@@ -39,6 +41,10 @@ async function fillLead(user: UserEvent, scope: HTMLElement): Promise<void> {
   await user.type(q.getByLabelText("Email"), "qa@example.com");
   await user.type(q.getByLabelText("Phone"), QA_SENTINEL);
   await user.click(q.getByLabelText("Yes"));
+}
+
+function submittedFormData(): Record<string, unknown> {
+  return (JSON.parse(fetchMock.mock.calls[0][1].body as string) as { form_data: Record<string, unknown> }).form_data;
 }
 
 function formSubmitPushes(): Record<string, unknown>[] {
@@ -203,7 +209,7 @@ describe.each([HERO_FORM_ID, FINAL_FORM_ID])("phone field (%s)", (formId) => {
 });
 
 describe("API payload guard", () => {
-  const lead = { firstName: "Qa", lastName: "Sentinel", email: "qa@example.com", homeowner: "yes", qualificationStatus: "qualified" } as const;
+  const lead = { firstName: "Qa", lastName: "Sentinel", email: "qa@example.com", reasonForContact: "", homeowner: "yes", qualificationStatus: "qualified" } as const;
 
   it.each([TYPED_OVERLONG, "25555550100", QA_SENTINEL, ""])("refuses to post phone %j that is not exactly 10 digits", async (phone) => {
     const { result } = renderHook(() => useMegaLeadForm());
@@ -247,8 +253,7 @@ describe("lead submission", () => {
     await fillLead(user, hero);
     await user.click(within(hero).getByRole("button", { name: SUBMIT_NAME }));
     await within(hero).findByText(SUCCESS_TITLE);
-    const payload = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { form_data: Record<string, string> };
-    expect(payload.form_data).toEqual({ firstName: "Qa", lastName: "Sentinel", email: "qa@example.com", phone: "5555550100", homeowner: "yes", qualificationStatus: "qualified" });
+    expect(submittedFormData()).toEqual(EXPECTED_FORM_DATA);
     expect(trackEvent).toHaveBeenCalledTimes(1);
     expect(trackEvent.mock.calls[0][0]).toBe("form_submit");
     expect(formSubmitPushes()).toHaveLength(1);
@@ -294,5 +299,87 @@ describe("keyboard", () => {
     expect(document.activeElement).toBe(screen.getAllByLabelText("Last name")[0]);
     expect(fetchMock).not.toHaveBeenCalled();
     expectNoConversion();
+  });
+});
+
+function reasonIn(scope: HTMLElement): HTMLTextAreaElement {
+  return within(scope).getByLabelText<HTMLTextAreaElement>(REASON_LABEL);
+}
+
+describe("reason for contacting us", () => {
+  it("each form has its own labelled, optional multiline field", () => {
+    const { hero, final } = renderForms();
+    for (const [scope, formId] of [[hero, HERO_FORM_ID], [final, FINAL_FORM_ID]] as const) {
+      const reason = reasonIn(scope);
+      expect(reason.tagName).toBe("TEXTAREA");
+      expect(reason.id).toBe(`${formId}-reasonForContact`);
+      expect(reason.name).toBe("reasonForContact");
+      expect(reason.required).toBe(false);
+      expect(reason.getAttribute("aria-required")).toBeNull();
+      expect(document.getElementById(reason.getAttribute("aria-describedby") ?? "")?.textContent).toBe("Optional");
+      expect(document.querySelectorAll(`#${formId}-reasonForContact`)).toHaveLength(1);
+    }
+  });
+
+  it("an empty reason does not block an accepted lead", async () => {
+    respondWith(JSON.stringify({ ok: true }), 200);
+    const user = userEvent.setup();
+    const { final } = renderForms();
+    await fillLead(user, final);
+    await user.click(within(final).getByRole("button", { name: SUBMIT_NAME }));
+    await within(final).findByText(SUCCESS_TITLE);
+    expect(submittedFormData().reasonForContact).toBe("");
+  });
+
+  it("Enter in the reason inserts a newline instead of submitting", async () => {
+    const user = userEvent.setup();
+    const { hero } = renderForms();
+    await fillLead(user, hero);
+    await user.type(reasonIn(hero), "No hot water{Enter}Since Monday");
+    expect(reasonIn(hero).value).toBe("No hot water\nSince Monday");
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(nativeSubmits).not.toHaveBeenCalled();
+  });
+
+  it.each([HERO_FORM_ID, FINAL_FORM_ID])("%s submits its own multiline reason once, as an independent key", async (formId) => {
+    respondWith(JSON.stringify({ ok: true }), 200);
+    const user = userEvent.setup();
+    const forms = renderForms();
+    const [scope, other] = formId === HERO_FORM_ID ? [forms.hero, forms.final] : [forms.final, forms.hero];
+    await user.type(reasonIn(other), "Other form text");
+    await fillLead(user, scope);
+    await user.type(reasonIn(scope), `Leak under ${formId}{Enter}kitchen sink`);
+    await user.click(within(scope).getByRole("button", { name: SUBMIT_NAME }));
+    await within(scope).findByText(SUCCESS_TITLE);
+    // JSON.parse keeps only the last duplicate key, so count occurrences in the raw body.
+    expect((fetchMock.mock.calls[0][1].body as string).match(/reasonForContact/g)).toHaveLength(1);
+    expect(submittedFormData()).toEqual({ ...EXPECTED_FORM_DATA, reasonForContact: `Leak under ${formId}\nkitchen sink` });
+    expect(reasonIn(other).value).toBe("Other form text");
+  });
+
+  it("a reason does not bypass required-field validation", async () => {
+    const user = userEvent.setup();
+    const { hero } = renderForms();
+    await user.type(reasonIn(hero), "Burst pipe");
+    await user.click(within(hero).getByRole("button", { name: SUBMIT_NAME }));
+    expect(within(hero).getByText("Enter your first name.")).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expectNoConversion();
+  });
+});
+
+describe("inherited SMS consent removed", () => {
+  it("renders no SMS checkbox or disclaimer and never adds smsConsent to the payload", async () => {
+    respondWith(JSON.stringify({ ok: true }), 200);
+    const user = userEvent.setup();
+    const { hero } = renderForms();
+    expect(within(hero).queryByRole("checkbox")).toBeNull();
+    expect(within(hero).queryByText(/SMS|text messages/i)).toBeNull();
+    expect(within(hero).getByText(/only to respond to this service request/i)).toBeTruthy();
+    await fillLead(user, hero);
+    await user.click(within(hero).getByRole("button", { name: SUBMIT_NAME }));
+    await within(hero).findByText(SUCCESS_TITLE);
+    expect(submittedFormData()).not.toHaveProperty("smsConsent");
+    expect(window.fetch).toBe(fetchMock);
   });
 });

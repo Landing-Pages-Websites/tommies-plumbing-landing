@@ -9,6 +9,7 @@ export const EMPTY_LEAD: LeadFormValues = {
   lastName: "",
   email: "",
   phone: "",
+  reasonForContact: "",
   homeowner: "",
 };
 
@@ -32,6 +33,7 @@ export function toLeadData(values: LeadFormValues): LeadFormData {
     lastName: values.lastName.trim(),
     email: values.email.trim(),
     phone: normalizePhone(values.phone) ?? "",
+    reasonForContact: values.reasonForContact,
     homeowner,
     qualificationStatus: homeowner === "yes" ? "qualified" : "disqualified",
   };
