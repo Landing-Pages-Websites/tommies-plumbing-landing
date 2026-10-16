@@ -4,7 +4,7 @@ import { Reveal } from "@/components/landing/Reveal";
 const STEPS = [
   {
     title: "Tell us what's going on",
-    body: "Send the short form or call the office. Four fields and one question — that's it.",
+    body: "Send the short form or call the office. A few fields and one question — that's it.",
   },
   {
     title: "Your request is received",
