@@ -25,6 +25,22 @@
     {
       "source": "/terms-of-service/",
       "destination": "https://landing.gomega.ai/terms-of-service?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/privacy",
+      "destination": "https://landing.gomega.ai/privacy-policy?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/privacy/",
+      "destination": "https://landing.gomega.ai/privacy-policy?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/terms",
+      "destination": "https://landing.gomega.ai/terms-of-service?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
+    },
+    {
+      "source": "/terms/",
+      "destination": "https://landing.gomega.ai/terms-of-service?tenant=0901d69a-a505-4374-a98e-269b96a9d4c3"
     }
   ]
 }
