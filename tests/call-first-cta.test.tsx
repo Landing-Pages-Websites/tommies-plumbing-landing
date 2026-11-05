@@ -1,10 +1,14 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { cleanup, render, screen, within } from "@testing-library/react";
+import { Phone } from "lucide-react";
+import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { DualCta } from "@/components/landing/DualCta";
 import { HeroCopy } from "@/components/landing/HeroCopy";
+import { PhoneButton } from "@/components/landing/PhoneButton";
 import { SiteHeader } from "@/components/landing/SiteHeader";
+import { BUTTON_STYLES } from "@/lib/button-styles";
 import { SERVICES } from "@/lib/content";
 import { HERO_FORM_ANCHOR, PHONE_DISPLAY, PHONE_HREF, PHONE_LABEL } from "@/lib/site-config";
 
@@ -87,6 +91,34 @@ describe("section CTA defaults stay unchanged", () => {
     expect(phone.className).toContain(OUTLINED);
     expect(phone.className).not.toContain(FILLED_RED);
     expect(phone.textContent).toBe(`Call ${PHONE_DISPLAY}`);
+  });
+});
+
+describe("default PhoneButton markup matches the 4cf8e09 baseline byte for byte", () => {
+  const DEFAULT_USAGES = [
+    { variant: "ghost", className: "" },
+    { variant: "ghostOnDark", className: "" },
+    { variant: "ghost", className: "min-w-0 max-sm:gap-1.5" },
+    { variant: "ghostOnDark", className: "min-w-0 max-sm:gap-1.5" },
+  ] as const;
+  const BASELINE_LABEL = `<span>Call <span class="whitespace-nowrap">${PHONE_DISPLAY}</span></span>`;
+  const ICON = renderToStaticMarkup(<Phone aria-hidden="true" className="h-5 w-5 shrink-0" strokeWidth={1.75} />);
+
+  function baselineMarkup(variant: keyof typeof BUTTON_STYLES, className: string): string {
+    return `<a href="${PHONE_HREF}" aria-label="${PHONE_LABEL.replaceAll("'", "&#x27;")}" class="${BUTTON_STYLES[variant]} ${className}">${ICON}${BASELINE_LABEL}</a>`;
+  }
+
+  it.each(DEFAULT_USAGES)("renders $variant with className '$className' exactly as the baseline", ({ variant, className }) => {
+    const props = className ? { variant, className } : { variant };
+    expect(renderToStaticMarkup(<PhoneButton {...props} />)).toBe(baselineMarkup(variant, className));
+  });
+
+  it("renders the bare default exactly as the baseline ghost button", () => {
+    expect(renderToStaticMarkup(<PhoneButton />)).toBe(baselineMarkup("ghost", ""));
+  });
+
+  it("emits the label as one text node, with no hydration comment between verb and number", () => {
+    expect(renderToString(<PhoneButton />)).toContain(BASELINE_LABEL);
   });
 });
 
