@@ -5,6 +5,7 @@ import type { ReactElement, ReactNode } from "react";
 import { QueryParamPersistence } from "@/components/landing/QueryParamPersistence";
 import { TrackingInit } from "@/components/landing/TrackingInit";
 import type { TrackingConfig } from "@/hooks/useTracking";
+import { GOOGLE_ADS_DESTINATION_SCRIPT } from "@/lib/google-ads-destination";
 import { MEGA_CONFIG, MEGA_ENDPOINTS, isPlaceholderId } from "@/lib/mega-config";
 import { GOOGLE_RATING, PHONE_DISPLAY, YEARS_EXPERIENCE } from "@/lib/site-config";
 import "./globals.css";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }): React
       <head>
         <meta name="mega-site-id" content={MEGA_TAG_CONFIG.siteId} />
         <script dangerouslySetInnerHTML={{ __html: MEGA_TAG_SCRIPT }} />
+        <script id="google-ads-destination" dangerouslySetInnerHTML={{ __html: GOOGLE_ADS_DESTINATION_SCRIPT }} />
         {/* defer, not async: React hoists async src scripts above the config script, so the optimizer could run before MEGA_TAG_CONFIG exists. */}
         {TRACKING_LIVE ? <script id="optimizer-script" src="https://cdn.gomega.ai/scripts/optimizer.min.js" data-site-id={MEGA_TAG_CONFIG.siteId} defer /> : null}
       </head>

@@ -35,8 +35,8 @@ export const SERVICES: ServiceItem[] = [
   {
     id: "busted-pipes",
     tag: "Urgent repairs",
-    title: "Busted-pipe and emergency repairs",
-    body: "A burst or leaking pipe needs a plumber, not a guess. Call the office or send a request and tell us what's going on.",
+    title: "Burst Pipe or Urgent Leak?",
+    body: "Call Tommie's Plumbing for help with a burst or leaking pipe. Tell us what's happening, or send a service request online.",
     points: ["Burst and leaking supply lines", "Call now or book online"],
     image: {
       src: "/brand/photos/burst-pipe-repair.jpg",

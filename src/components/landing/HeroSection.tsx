@@ -10,7 +10,7 @@ import { HeroPhoto } from "@/components/landing/HeroPhoto";
  */
 export function HeroSection(): ReactElement {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="hero-surface relative isolate overflow-hidden pb-16 pt-[5.5rem] sm:pt-32 lg:pb-16 lg:pt-36">
+    <section id="hero" aria-labelledby="hero-title" className="hero-surface relative isolate overflow-hidden pb-16 pt-32 sm:pt-[10.5rem] md:pt-32 lg:pb-16 lg:pt-36">
       <div aria-hidden="true" className="hero-blueprint absolute inset-0 -z-10" />
       <div className="relative mx-auto grid max-w-[1200px] gap-5 px-6 sm:gap-8 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-10">
         <HeroCopy />

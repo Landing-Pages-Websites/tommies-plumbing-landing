@@ -131,5 +131,33 @@
         "Current promotions from https://tommiesplumbing.com"
       ]
     }
-  }
+  },
+  "amendments": [
+    {
+      "task_id": "ba3e10b6-d527-4f63-a19d-de53214c44d6",
+      "task_type": "LANDING_PAGE_EDITS",
+      "applied_on": "2026-11-05",
+      "authority": "This task's input_data (content_requests, edit_description) is the authority for the hero headline and paragraph, the header/hero CTA labels and hierarchy, the emergency service card heading and paragraph, and the Google Ads destination below. The original input_data above stays the authority for everything else.",
+      "supersedes": [
+        "Hero H1 'Plumbing help from Morristown to Bristol' -> 'Need a Local Plumber?'",
+        "Hero paragraph 'Need a water heater, repipe, or busted-pipe repair? ...' -> 'Serving homeowners from Morristown to Bristol. Call Tommie's Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade.'",
+        "Header and hero CTAs: phone action becomes the primary filled 'Call Now' CTA, listed first; 'Book Plumbing Service' (#hero-form) becomes the outlined secondary; both show at every width",
+        "Emergency service card 'Busted-pipe and emergency repairs' / 'A burst or leaking pipe needs a plumber, not a guess. ...' -> 'Burst Pipe or Urgent Leak?' / 'Call Tommie's Plumbing for help with a burst or leaking pipe. Tell us what's happening, or send a service request online.'"
+      ],
+      "preserved": [
+        "Club-member service fee waiver and its condition (offers section, FAQ), now no longer repeated in the hero paragraph",
+        "Form fields, requiredness, payload keys, endpoints and notification recipients (normalized.form)",
+        "Phone contract (normalized.phone): display 423-638-3662, tel:+14236383662, CTM account 572388 swap; other section CTAs keep booking primary and 'Call <number>' secondary",
+        "Tracking contract (normalized.tracking): GTM-MNZHFKKH, AW-11391344729 (via GTM), pixel 858245649089003, MegaTag siteKey e34w0qv1g1tocgod, CTM t.js afterInteractive"
+      ],
+      "google_ads_destination": {
+        "id": "AW-11380233464",
+        "customer": "customers/3522349686",
+        "purpose": "Google dynamic-number domain-ownership verification",
+        "mechanism": "One inline head script adds a single gtag 'config' command to the existing dataLayer (or calls an existing window.gtag). No loader, no 'js' command, no events, conversion labels, enhanced conversions or consent settings.",
+        "never_on_page": "+14232002342 (offsite Google call-asset number)"
+      },
+      "out_of_scope": "No new design brief: Stage0 research at website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3 remains the baseline. Current CCP has no dontSayList, creative.doNotUse is [] and compliance is {}."
+    }
+  ]
 }

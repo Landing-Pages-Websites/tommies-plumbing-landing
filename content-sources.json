@@ -43,6 +43,11 @@
           "type": "research",
           "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
           "quote": "Tommie’s Plumbing brings more than 30 years of plumbing trade experience to families and businesses"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Serving homeowners from Morristown to Bristol. ... Locally owned, plumbing-only service with 30+ years in the trade."
         }
       ],
       "status": "supported"
@@ -88,6 +93,11 @@
           "type": "task_input",
           "ref": "task-spec.json#/input_data/content_requests",
           "quote": "Proof points confirmed on the call: locally owned"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Serving homeowners from Morristown to Bristol. ... Locally owned, plumbing-only service with 30+ years in the trade."
         }
       ],
       "status": "supported"
@@ -114,6 +124,11 @@
           "type": "research",
           "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/company_description.json",
           "quote": "At Tommie’s Plumbing, plumbing is all we do"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Serving homeowners from Morristown to Bristol. ... Locally owned, plumbing-only service with 30+ years in the trade."
         }
       ],
       "status": "supported"
@@ -224,7 +239,8 @@
       "claim": "Water heaters (gas and electric tank, all makes and models), tankless installation and service, whole-home repipes, busted-pipe/emergency repairs",
       "used_in": [
         "src/lib/content.ts (SERVICES, FAQ)",
-        "src/components/landing/ServicesSection.tsx"
+        "src/components/landing/ServicesSection.tsx",
+        "src/components/landing/HeroCopy.tsx (hero paragraph)"
       ],
       "sources": [
         {
@@ -237,9 +253,15 @@
           "ref": "https://tommiesplumbing.com/plumbing/",
           "quote": "Our team has experience servicing all makes and models, including gas and electric standard tank units and tankless water heaters.",
           "checked": "2026-09-22 (research capture sources/content_raw.json)"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Call Tommie's Plumbing for water heater service, repipes, burst pipes or leaks."
         }
       ],
-      "status": "supported"
+      "status": "supported",
+      "notes": "Emergency card heading and paragraph supersede the prior wording per task ba3e10b6-d527-4f63-a19d-de53214c44d6: 'Burst Pipe or Urgent Leak?' / 'Call Tommie's Plumbing for help with a burst or leaking pipe. Tell us what's happening, or send a service request online.' No 24/7, arrival-time or same-day claims."
     },
     {
       "id": "service-area",
@@ -261,6 +283,11 @@
           "type": "research",
           "ref": "website-lp-build-research-data/0901d69a-a505-4374-a98e-269b96a9d4c3/sources/memories.json",
           "quote": "serving Northeast Tennessee and the Tri-Cities, including Morristown, Greeneville, Fall Branch, Johnson City, Kingsport, Bristol, Elizabethton, and nearby communities/counties"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Serving homeowners from Morristown to Bristol. ... Locally owned, plumbing-only service with 30+ years in the trade."
         }
       ],
       "status": "supported"
@@ -340,13 +367,20 @@
       "id": "phone",
       "claim": "Call 423-638-3662",
       "used_in": [
-        "src/lib/site-config.ts (PHONE_DISPLAY, PHONE_HREF)"
+        "src/lib/site-config.ts (PHONE_DISPLAY, PHONE_HREF)",
+        "src/components/landing/SiteHeader.tsx ('Call Now', primary)",
+        "src/components/landing/HeroCopy.tsx ('Call Now', primary)"
       ],
       "sources": [
         {
           "type": "task_input",
           "ref": "task-spec.json#/input_data/phone_routing_number",
           "quote": "423-638-3662"
+        },
+        {
+          "type": "task_input",
+          "ref": "tasks/ba3e10b6-d527-4f63-a19d-de53214c44d6 input_data.content_requests (recorded in task-spec.json#/amendments/0)",
+          "quote": "Primary header/hero phone action label: \"Call Now\"; retain the existing dynamic phone number and tel binding."
         }
       ],
       "status": "supported"
