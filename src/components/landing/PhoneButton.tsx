@@ -21,7 +21,14 @@ const DEFAULT_LABEL = (
   </>
 );
 
-function actionLabel(action = "Call", numberClassName = ""): ReactNode {
+const DEFAULT_VERB = "Call";
+
+// Keeps the visible action words at the start of the accessible name (WCAG 2.5.3 label-in-name).
+function accessibleName(action?: string): string {
+  return action === undefined ? PHONE_LABEL : `${action}${PHONE_LABEL.slice(DEFAULT_VERB.length)}`;
+}
+
+function actionLabel(action = DEFAULT_VERB, numberClassName = ""): ReactNode {
   return (
     <>
       {action} <span className={`whitespace-nowrap ${numberClassName}`}>{PHONE_DISPLAY}</span>
@@ -38,7 +45,7 @@ export function PhoneButton({
 }: PhoneButtonProps): ReactElement {
   const content = action === undefined && numberClassName === undefined ? label : actionLabel(action, numberClassName);
   return (
-    <a href={PHONE_HREF} aria-label={PHONE_LABEL} className={`${BUTTON_STYLES[variant]} ${className}`}>
+    <a href={PHONE_HREF} aria-label={accessibleName(action)} className={`${BUTTON_STYLES[variant]} ${className}`}>
       <Phone aria-hidden="true" className="h-5 w-5 shrink-0" strokeWidth={1.75} />
       <span>{content}</span>
     </a>

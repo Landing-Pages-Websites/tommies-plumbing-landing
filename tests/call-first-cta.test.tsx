@@ -10,7 +10,7 @@ import { PhoneButton } from "@/components/landing/PhoneButton";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { BUTTON_STYLES } from "@/lib/button-styles";
 import { SERVICES } from "@/lib/content";
-import { HERO_FORM_ANCHOR, PHONE_DISPLAY, PHONE_HREF, PHONE_LABEL } from "@/lib/site-config";
+import { BRAND_NAME, HERO_FORM_ANCHOR, PHONE_DISPLAY, PHONE_HREF, PHONE_LABEL } from "@/lib/site-config";
 
 const BOOK_LABEL = "Book Plumbing Service";
 const FILLED_RED = "bg-brand-red";
@@ -18,6 +18,8 @@ const OUTLINED = "border-brand-navy";
 const HERO_H1 = "Need a Local Plumber?";
 const HERO_BODY =
   "Serving homeowners from Morristown to Bristol. Call Tommie's Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade.";
+const CALL_NOW = "Call Now";
+const CALL_NOW_NAME = `${CALL_NOW} ${BRAND_NAME} at ${PHONE_DISPLAY}`;
 const HIDDEN_CLASS = /(^|\s)(max-\w+:)?hidden(\s|$)/;
 const OFFSITE_AD_NUMBER = /4232002342|423[-.) ]*200[-. ]*2342/;
 const SRC_DIR = path.resolve(import.meta.dirname, "../src");
@@ -33,8 +35,8 @@ function expectCallFirst(scope: HTMLElement): void {
   expect(links).toHaveLength(2);
   const [phone, book] = links;
   expect(phone.getAttribute("href")).toBe(PHONE_HREF);
-  expect(phone.getAttribute("aria-label")).toBe(PHONE_LABEL);
-  expect(phone.textContent).toContain("Call Now");
+  expect(phone.getAttribute("aria-label")).toBe(CALL_NOW_NAME);
+  expect(phone.textContent).toContain(CALL_NOW);
   expect(phone.className).toContain(FILLED_RED);
   expect(book.getAttribute("href")).toBe(HERO_FORM_ANCHOR);
   expect(book.textContent).toBe(BOOK_LABEL);
@@ -79,6 +81,33 @@ describe("hero", () => {
     const [phone, book] = actionLinks(container);
     expect(phone.textContent).toBe(`Call Now ${PHONE_DISPLAY}`);
     expect(book.className).not.toMatch(HIDDEN_CLASS);
+  });
+});
+
+describe("call-first phone CTAs satisfy label-in-name", () => {
+  it.each([
+    ["header", <SiteHeader key="header" />],
+    ["hero", <HeroCopy key="hero" />],
+  ])("%s accessible name starts with the visible action and keeps brand and number", (_, ui) => {
+    render(ui);
+    const phone = screen.getByRole("link", { name: CALL_NOW_NAME });
+    expect(phone.getAttribute("href")).toBe(PHONE_HREF);
+  });
+
+  it("derives the action name from PHONE_LABEL by swapping only its leading verb", () => {
+    render(<PhoneButton action="Ring" />);
+    expect(screen.getByRole("link").getAttribute("aria-label")).toBe(`Ring${PHONE_LABEL.slice("Call".length)}`);
+  });
+
+  it("keeps PHONE_LABEL when only the number is restyled", () => {
+    render(<PhoneButton numberClassName="max-lg:hidden" />);
+    expect(screen.getByRole("link").getAttribute("aria-label")).toBe(PHONE_LABEL);
+  });
+
+  it("still supports a fully custom label with the default accessible name", () => {
+    render(<PhoneButton label="Talk to a plumber" />);
+    const phone = screen.getByRole("link", { name: PHONE_LABEL });
+    expect(phone.textContent).toBe("Talk to a plumber");
   });
 });
 
