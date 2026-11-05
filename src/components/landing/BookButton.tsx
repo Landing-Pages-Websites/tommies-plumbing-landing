@@ -1,12 +1,14 @@
 import { ArrowRight } from "lucide-react";
 import type { ReactElement } from "react";
-import { BUTTON_STYLES } from "@/lib/button-styles";
+import { BUTTON_STYLES, type ButtonVariant } from "@/lib/button-styles";
 import { FORM_ANCHOR, PRIMARY_CTA } from "@/lib/site-config";
 
 interface BookButtonProps {
   label?: string;
   href?: string;
   onDark?: boolean;
+  /** Overrides the red primary, e.g. `ghost` where the phone call is the primary action. */
+  variant?: ButtonVariant;
   className?: string;
 }
 
@@ -14,11 +16,12 @@ export function BookButton({
   label = PRIMARY_CTA,
   href = FORM_ANCHOR,
   onDark = false,
+  variant,
   className = "",
 }: BookButtonProps): ReactElement {
-  const variant = onDark ? BUTTON_STYLES.primaryOnDark : BUTTON_STYLES.primary;
+  const styles = BUTTON_STYLES[variant ?? (onDark ? "primaryOnDark" : "primary")];
   return (
-    <a href={href} className={`group ${variant} ${className}`}>
+    <a href={href} className={`group ${styles} ${className}`}>
       <span>{label}</span>
       <ArrowRight
         aria-hidden="true"

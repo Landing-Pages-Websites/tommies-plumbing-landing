@@ -59,6 +59,13 @@ html {
   scroll-padding-top: 5.5rem;
 }
 
+/* Below md the header stacks its call/book row under the logo (113–125px tall incl. border) */
+@media (width < 48rem) {
+  html {
+    scroll-padding-top: 8.25rem;
+  }
+}
+
 body {
   background: var(--color-canvas);
   color: var(--color-ink);
