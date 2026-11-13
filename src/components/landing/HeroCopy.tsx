@@ -24,7 +24,7 @@ export function HeroCopy(): ReactElement {
           Need a Local Plumber?
         </h1>
         <p className="mt-4 max-w-xl text-muted sm:mt-5 sm:text-[1.1875rem]">
-          Serving homeowners from Morristown to Bristol. Call Tommie&apos;s Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade.
+          Serving homeowners from Morristown to Bristol. Call Tommie&apos;s Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade, and we never charge overtime fees.
         </p>
       </div>
       <ul className="order-5 flex flex-wrap gap-x-6 gap-y-2 lg:mt-6">
