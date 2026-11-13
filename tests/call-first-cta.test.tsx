@@ -17,7 +17,7 @@ const FILLED_RED = "bg-brand-red";
 const OUTLINED = "border-brand-navy";
 const HERO_H1 = "Need a Local Plumber?";
 const HERO_BODY =
-  "Serving homeowners from Morristown to Bristol. Call Tommie's Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade.";
+  "Serving homeowners from Morristown to Bristol. Call Tommie's Plumbing for water heater service, repipes, burst pipes or leaks. Locally owned, plumbing-only service with 30+ years in the trade, and we never charge overtime fees.";
 const CALL_NOW = "Call Now";
 const CALL_NOW_NAME = `${CALL_NOW} ${BRAND_NAME} at ${PHONE_DISPLAY}`;
 const HIDDEN_CLASS = /(^|\s)(max-\w+:)?hidden(\s|$)/;
